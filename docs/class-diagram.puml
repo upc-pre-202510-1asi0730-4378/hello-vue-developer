@@ -1,0 +1,51 @@
+@startuml Hello Vue Developer Class Diagram
+class App {
+-firstName: String
+-lastName: String
+-developerCount: Number
+-hasRegistered: Boolean
++onDeveloperRegistered(developer: Developer)
++onLater(developer: Developer)
++updateDeveloperCount((developer: Developer)
+}
+
+package "Greetings Bounded Context" {
+ package "model" {
+    class Developer {
+     -firstName: String
+     -lastName: String
+     +getFullName(): String
+    }
+ }
+ package "components" {
+ class RegisterDeveloper {
+    -firstName: String
+    -lastName: String
+    -errorMessage: String
+    +onRegister()
+    +onLater()
+    +clearForm()
+    -- emits --
+    developer-registered(developer: Developer)
+    later(developer: Developer)
+ }
+ class GreetDeveloper {
+ +firstName: String
+ +lastName: String
+ +getGreeting(): String
+ }
+ class ShowDeveloperCount {
+ +developerCount: Number
+ }
+ }
+}
+' Relationships
+App *-down-> RegisterDeveloper : contains
+App *-down-> GreetDeveloper : contains
+App *-down-> ShowDeveloperCount : contains
+RegisterDeveloper --> App : emits developer-registered, later
+GreetDeveloper --> Developer : uses
+App --> Developer : uses
+GreetDeveloper <-- App : passes firstName, lastName
+ShowDeveloperCount <-- App : passes developerCount
+@enduml
