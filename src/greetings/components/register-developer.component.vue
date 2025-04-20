@@ -51,7 +51,7 @@ export default {
         </div>
         <div class="field">
           <label for="last-name">Last Name:</label>
-          <input id="last-name" v-model="firstName" type="text"/>
+          <input id="last-name" v-model="lastName" type="text"/>
         </div>
         <div class="actions">
           <button type="submit">Register</button>
